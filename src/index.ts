@@ -1,20 +1,16 @@
-import {ApolloServer, gql} from 'apollo-server';
+import {ApolloServer} from 'apollo-server';
 
-const typeDefs = gql`
-  type Query {
-    ping: String
-  }
-`;
+import resolvers from './graphql/resolvers';
+import typeDefs from './graphql/schemas';
 
-const resolvers = {
-  Query: {
-    ping: () => 'Pong',
-  },
-};
+import services from './services';
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: {
+    services,
+  },
 });
 
 server.listen().then(({url}) => {
