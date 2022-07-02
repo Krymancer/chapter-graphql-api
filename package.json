@@ -3,12 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "src/index.ts",
+  "type": "module",
   "scripts": {
     "build": "rimraf dist && tsc",
     "preserve": "npm run build",
-    "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q build/index.js\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"tsc --watch\" \"nodemon -q --experimental-specifier-resolution=node --experimental-json-modules build/index.js\"",
     "prestart": "npm run build",
-    "start": "cross-env NODE_ENV=production node build/index.js",
+    "start": "cross-env NODE_ENV=production node --experimental-specifier-resolution=node  --experimental-json-modules build/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -34,11 +35,15 @@
   },
   "dependencies": {
     "@types/node": "^18.0.0",
+    "apollo-server": "^3.9.0",
     "body-parser": "^1.20.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "graphql": "^16.5.0",
     "helmet": "^5.1.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "sequelize": "^6.21.2",
+    "sqlite3": "^5.0.8"
   }
 }
